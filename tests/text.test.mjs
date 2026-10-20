@@ -1,12 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { normalize, compare, bestMatch, wordCount, escapeHtml, hashId } from '../js/text.js';
-import { DECKS, PRONUNCIATION, QUESTIONS, PLAN } from '../js/data.js';
+import { DECKS, PRONUNCIATION, QUESTIONS, PLAN, DICTATION } from '../js/data.js';
 
 test('normalize expands contractions and drops punctuation', () => {
   assert.deepEqual(normalize("I'm not sure I understood."), ['i', 'am', 'not', 'sure', 'i', 'understood']);
   assert.deepEqual(normalize('I’m here!'), ['i', 'am', 'here']);
   assert.deepEqual(normalize('fifty-six'), ['fifty', 'six']);
+});
+
+test('spoken reductions match the full form', () => {
+  assert.equal(compare('What do you want to do?', 'what do you wanna do').score, 100);
+  assert.equal(compare("I'm going to call you later.", 'im gonna call you later').score, 100);
 });
 
 test('numbers said as digits still match the written words', () => {
@@ -48,4 +53,7 @@ test('content is complete and ids are unique', () => {
   assert.equal(PLAN.length, 12);
   assert.ok(QUESTIONS.every((q) => q.q && q.pt && q.a));
   assert.ok(PRONUNCIATION.every((p) => (p.pairs || p.words).length && p.sentence));
+  assert.ok(DICTATION.length >= 15 && DICTATION.every((d) => d.en && d.tip));
+  // Typing exactly what was heard must score 100%.
+  assert.ok(DICTATION.every((d) => compare(d.en, d.en).score === 100));
 });

@@ -1,38 +1,41 @@
 # Brick by Brick English 🧱
 
-**An English trainer for busy adults (40+) who need to *speak* — fast.**
-Built by a former bricklayer turned AI builder, for people like him: no time to waste, a real goal (a job interview, a move abroad), and a family to take care of.
+**English for Brazilians who want to work with AI.**
+A speaking-first trainer for busy adults: 20 minutes a day, in the order that research says works — learn, recall, repeat, speak — with the vocabulary of AI jobs and the mistakes Brazilians actually make.
 
 **Live app:** https://diegotrindademt.github.io/brick-by-brick-english/ (installable on Android/iPhone, works offline)
 
-The interface is in Brazilian Portuguese because the target learner is a Brazilian at A2–B1 level. All code and docs are in English.
+The interface is in Brazilian Portuguese because the learner is a Brazilian at A2–B1 level. Code and docs are in English.
 
----
+## Who it is for
 
-## Why another English app?
+Brazilian adults who build (or want to build) a career in AI — engineering, automation, AI products — and need to pass an interview in English, talk in meetings and understand native speakers. Built by a Brazilian self-taught AI builder for his own move into international AI work.
 
-Most apps optimize for streaks and taps. Adults with 20 minutes a day need the opposite: fewer features, the right order, and a lot of speaking out loud. Every feature here maps to a learning-science result:
+## What it combines (and where each idea comes from)
 
-| Feature | Evidence behind it |
-|---|---|
-| **Spaced repetition** of short phrases ("bricks"), SM-2 style scheduler | Distributed practice beats cramming ([Cepeda et al., 2006](https://doi.org/10.1037/0033-2909.132.3.354)) |
-| **Production-first review**: see Portuguese, *say* the English, then check | Retrieval practice ([Roediger & Karpicke, 2006](https://doi.org/10.1111/j.1467-9280.2006.01693.x)) and the production effect — saying words aloud improves memory ([MacLeod et al., 2010](https://doi.org/10.1037/a0018785)) |
-| **Chunks, not word lists** (interview, tech talk, life abroad) | Frequent multi-word expressions drive fluency; adults learn them fast because they already know the concepts |
-| **Shadowing** at 0.7x and 1x + record-and-compare | Prosody and rhythm practice for intelligibility |
-| **Pronunciation for Brazilians** (TH, final -ED, initial R, epenthetic "i", ship/sheep, dark L, final M, word stress) with minimal pairs and speech recognition | The goal is *intelligibility*, not a native accent ([Derwing & Munro, 2015](https://doi.org/10.1075/lllt.42)) |
-| **Cognates and false friends** | Portuguese gives adults thousands of words for free (-ção → -tion, -mente → -ly) |
-| **Personal pitch + "My bricks"** (phrases from your own life and AI corrections) | Self-referential material is remembered better ([Rogers et al., 1977](https://doi.org/10.1037/0022-3514.35.9.677)) |
-| **Fixed 20-minute session in 4 steps** and a 12-week plan with concrete targets | Implementation intentions ("when X, I do Y") make habits stick ([Gollwitzer, 1999](https://doi.org/10.1037/0003-066X.54.7.493)) |
-| **Hands-free mode** (EN → pause → PT → slow EN) | Uses dead time: commuting, construction work, chores |
+No single method is "the best". The app stacks the techniques with the strongest evidence and adapts each one to Portuguese speakers:
+
+| Technique | Inspired by | Evidence | What is specific to Brazilians here |
+|---|---|---|---|
+| **Spaced repetition of short phrases** | SuperMemo SM-2 / Anki | Distributed practice beats cramming ([Cepeda et al., 2006](https://doi.org/10.1037/0033-2909.132.3.354)) | Whole sentences ("chunks"), not word lists |
+| **Production-first recall**: read Portuguese, *say* the English, then check | Pimsleur, sentence mining (Glossika) | Retrieval practice ([Roediger & Karpicke, 2006](https://doi.org/10.1111/j.1467-9280.2006.01693.x)); saying aloud improves memory ([MacLeod et al., 2010](https://doi.org/10.1037/a0018785)) | Speech recognition checks what you said |
+| **Contrastive error drills** ("I have 40 years" → "I'm 40") | Classic contrastive analysis, Language Transfer | Explicit focus on form works for adults ([Norris & Ortega, 2000](https://doi.org/10.1111/0023-8333.00136)) | 30 of the most common Portuguese-transfer errors |
+| **Cognates and false friends** | Language Transfer | Portuguese gives thousands of words for free (-ção → -tion) | actually, pretend, push, parents, eventually… |
+| **Shadowing** + record and compare | Alexander Arguelles' shadowing | Rhythm and prosody practice for intelligibility | Slow (0.7x) then natural speed |
+| **Pronunciation by minimal pairs** | ELSA-style feedback | Aim for *intelligibility*, not a native accent ([Derwing & Munro, 2015](https://doi.org/10.1075/lllt.42)) | TH, final -ED, initial R, the extra "i" (big-i), ship/sheep, dark L, final M, word stress |
+| **Dictation of connected speech** ("gonna", "whatcha", flap T) | Dictogloss / dictation | Bottom-up listening is the main gap for intermediate learners | 20 high-frequency reductions with tips in Portuguese |
+| **AI vocabulary with pronunciation** | — | Self-relevant material is remembered better ([Rogers et al., 1977](https://doi.org/10.1037/0022-3514.35.9.677)) | data, cache, query, Python, GitHub, latency, schema… written the way a Brazilian reads them |
+| **AI conversation partner** | Speak, Praktika | Interaction with feedback | Role-plays for AI job interviews, plus life abroad; corrections in Portuguese turn into new cards |
+| **Fixed 20-minute session + 12-week plan** | Habit research | Implementation intentions ([Gollwitzer, 1999](https://doi.org/10.1037/0003-066X.54.7.493)) | One button: "start" |
 
 Adults are not worse learners: older learners progress *faster* than children in the first months ([Snow & Hoefnagel-Höhle, 1978](https://doi.org/10.2307/1128953)). What they lack is time, so the app removes every decision except "start".
 
-An honest note on speed: expect roughly 180–200 guided hours per CEFR level. Twenty focused minutes a day plus real conversations moves an A2 speaker to a confident B1 in about 3 months — enough to handle a structured interview.
+An honest note on speed: expect roughly 180–200 guided hours per CEFR level. Twenty focused minutes a day plus real conversations moves an A2 speaker to a confident B1 in about 3 months — enough for a structured interview.
 
 ## Features
 
 - **Today**: 1) new bricks → 2) spaced review (speak before you reveal) → 3) shadowing → 4) one interview question per day, answered out loud with live transcript, words-per-minute and optional AI correction.
-- **Listen**: hands-free audio loop for the car or the job site, with screen wake lock.
+- **Listen**: hands-free audio loop (EN → pause → PT → slow EN) with screen wake lock, and **dictation** of natural-speed connected speech.
 - **Pronunciation**: 8 trouble spots for Brazilian speakers, minimal pairs checked by speech recognition.
 - **AI Coach** (optional, bring your own free Gemini key): role-plays (job interview, explaining your project, school enrollment, pediatrician, renting, small talk), inline corrections in Portuguese, writing correction, pitch rewriting. Corrections can be turned into new bricks with one tap.
 - **Progress**: streak, minutes, bricks per topic, 12-week plan, free level test link (EF SET).
@@ -49,7 +52,7 @@ js/text.js          transcript vs. target comparison (LCS over normalized words,
 js/speech.js        Web Speech API (TTS + recognition) and MediaRecorder
 js/ai.js            Gemini client: model fallback chain, timeouts, JSON-mode responses
 js/store.js         localStorage persistence, backup/restore
-js/data.js          content: ~250 bricks, pronunciation drills, interview questions, 12-week plan
+js/data.js          content: ~280 bricks in 9 topics, pronunciation drills, dictation, interview questions, 12-week plan
 sw.js               offline cache (network-first)
 tests/              node:test unit tests (scheduler, scoring, content integrity)
 ```

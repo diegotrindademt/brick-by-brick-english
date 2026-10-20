@@ -1,5 +1,5 @@
 // Offline support: cache the app shell, network-first so updates arrive quickly.
-const CACHE = 'bbe-v1';
+const CACHE = 'bbe-v2';
 const SHELL = [
   './', './index.html', './css/style.css', './manifest.webmanifest',
   './js/app.js', './js/data.js', './js/srs.js', './js/text.js', './js/speech.js', './js/ai.js', './js/store.js',

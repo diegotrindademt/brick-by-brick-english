@@ -1,4 +1,4 @@
-import { DECKS, PRONUNCIATION, QUESTIONS, SCENARIOS, PLAN } from './data.js';
+import { DECKS, PRONUNCIATION, QUESTIONS, SCENARIOS, PLAN, DICTATION } from './data.js';
 import {
   GRADES, todayStr, addDays, daysBetween, newCard, nextInterval, review, isDue, isMature,
   formatInterval, streak,
@@ -545,8 +545,8 @@ function renderHome() {
   const nothing = !due && !fresh;
   setView(`
     <section class="hero">
-      <h1>Tijolo por tijolo.</h1>
-      <p>20 minutos por dia, na ordem certa: aprender, lembrar, repetir e falar.</p>
+      <h1>Inglês para trabalhar com IA.</h1>
+      <p>Para brasileiros: 20 minutos por dia, na ordem certa — aprender, lembrar, repetir e falar. Tijolo por tijolo.</p>
     </section>
     <section class="card">
       <h2>Sessão de hoje</h2>
@@ -602,12 +602,65 @@ function listenSource(src) {
   return [...CATALOG.values()].filter((c) => c.deck === src);
 }
 
+let listenMode = 'free';
+
+function listenTabs() {
+  const tabs = [['free', '🎧 Mãos livres'], ['dict', '✍️ Ditado (ouvido nativo)']];
+  return `<div class="tabs">${tabs.map(([id, l]) => `<button class="tab ${listenMode === id ? 'active' : ''}" data-act="mode" data-id="${id}">${l}</button>`).join('')}</div>`;
+}
+
+const switchMode = (el) => { stopPlayer(); listenMode = el.dataset.id; renderListen(); };
+
+// Dictation: hear natural-speed English, type it, see what your ear missed.
+let dict = { i: 0, order: [], hits: 0, done: 0 };
+
+function renderDictation() {
+  if (!dict.order.length) dict.order = DICTATION.map((_, i) => i).sort(() => Math.random() - 0.5);
+  const item = DICTATION[dict.order[dict.i % dict.order.length]];
+  setView(`
+    ${listenTabs()}
+    <section class="card">
+      <h2>✍️ Ditado — ouvido nativo</h2>
+      <p class="muted">Brasileiro trava mais para <b>entender</b> do que para falar: nativo junta as palavras ("gonna", "whatcha"). Ouça na velocidade real, digite o que entendeu e veja o que seu ouvido perdeu.</p>
+      <div class="row">
+        <button class="btn primary" data-act="play">🔊 Ouvir (normal)</button>
+        <button class="btn" data-act="slow">🐢 Devagar</button>
+      </div>
+      <input id="typed" placeholder="Digite o que você ouviu" autocomplete="off" autocapitalize="off">
+      <button class="btn wide" data-act="check">Conferir</button>
+      <div id="dout"></div>
+      <p class="muted">Acertos nesta rodada: ${dict.hits}/${dict.done}</p>
+    </section>
+  `, {
+    mode: switchMode,
+    play: () => say(item.en, { rate: 1.05 }),
+    slow: () => say(item.en, { rate: 0.7 }),
+    check: () => {
+      const typed = document.getElementById('typed').value;
+      const r = compare(item.en, typed);
+      dict.done += 1;
+      if (r.score >= 90) dict.hits += 1;
+      bump('spoken');
+      document.getElementById('dout').innerHTML = `
+        ${renderWords({ ...r, said: '' })}
+        <p class="en">${h(item.en)}</p>
+        <p class="note">👂 ${h(item.tip)}</p>
+        <div class="row"><button class="btn" data-act="play">🔊 De novo</button><button class="btn primary" data-act="next">Próxima ➜</button></div>`;
+    },
+    next: () => { dict.i += 1; renderDictation(); },
+  });
+  document.getElementById('typed').addEventListener('keydown', (e) => { if (e.key === 'Enter') actions.check(); });
+  setTimeout(() => say(item.en, { rate: 1.05 }), 300);
+}
+
 function renderListen() {
+  if (listenMode === 'dict') return renderDictation();
   const opts = [['today', '🔁 Minhas revisões + o que vi hoje'], ...DECKS.map((d) => [d.id, `${d.emoji} ${d.title}`]), ['custom', '⭐ Meus tijolos']];
   setView(`
+    ${listenTabs()}
     <section class="card">
       <h2>🎧 Modo mãos livres</h2>
-      <p class="muted">Para o carro, a obra, a academia ou lavando louça. O app fala em inglês, dá uma pausa para você repetir, traduz e repete devagar.</p>
+      <p class="muted">Para o carro, a academia ou lavando louça. O app fala em inglês, dá uma pausa para você repetir, traduz e repete devagar.</p>
       <label>O que ouvir
         <select id="src">${opts.map(([v, l]) => `<option value="${v}">${h(l)}</option>`).join('')}</select>
       </label>
@@ -623,6 +676,7 @@ function renderListen() {
       <p class="muted">Aperte ▶ e deixe a tela ligada.</p>
     </section>
   `, {
+    mode: switchMode,
     play: () => startPlayer(),
     stop: () => { stopPlayer(); document.getElementById('now').innerHTML = '<p class="muted">Pausado.</p>'; },
     skip: () => { if (player.running) { player.i += 1; restartPlayer(); } },
@@ -878,7 +932,7 @@ function renderWrite(head, common) {
   });
 }
 
-const DEFAULT_PITCH = "Hi, I'm Diego. For many years I worked in construction, as a bricklayer. Today I build AI tools: agents, automations and full apps. I built an AI platform with chat, agents and a mobile app, and I sold a business app to three paying customers. I learned everything by building, one brick at a time. Now I want to bring this energy to a team that builds real AI products.";
+const DEFAULT_PITCH = "Hi, I'm Diego, from Brazil. I work from home, and my wife and I run a lighting business. This year I taught myself to build AI tools: agents, automations and full apps. I built an AI platform with chat, agents and a mobile app, and I already sold a business app to a customer. I learn by building, one brick at a time. Now I want to join a team that builds real AI products.";
 
 function renderPitch(head, common) {
   const pitch = S.pitch || DEFAULT_PITCH;

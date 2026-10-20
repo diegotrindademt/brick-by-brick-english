@@ -6,8 +6,8 @@ const ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models';
 const FALLBACK_MODELS = ['gemini-flash-lite-latest', 'gemini-3.5-flash-lite', 'gemini-3.1-flash-lite', 'gemini-3.5-flash', 'gemini-flash-latest'];
 const TIMEOUT_MS = 25000;
 
-const LEARNER = `The learner is a Brazilian adult (40+), native Portuguese speaker, around A2-B1 in English,
-preparing to work in tech abroad (AI engineer) and to move with his family. He has little time.`;
+const LEARNER = `The learner is a Brazilian adult, native Portuguese speaker, around A2-B1 in English,
+who wants to work with AI (AI engineering, automation, AI products), possibly abroad. He has little time.`;
 
 async function call(model, key, body) {
   const ctrl = new AbortController();
@@ -94,7 +94,7 @@ Return JSON only: {"corrected": "corrected text in natural English", "tips": ["u
 }
 
 export async function improvePitch({ key, model, text }) {
-  const system = `You help a Brazilian AI builder (former bricklayer, no degree) write his 45-second "Tell me about yourself" pitch.
+  const system = `You help a Brazilian self-taught AI builder (small-business owner, no degree) write his 45-second "Tell me about yourself" pitch.
 ${LEARNER}
 Rewrite his text in simple, confident spoken English (B1, short sentences, easy to pronounce), 90-120 words.
 Keep only true facts that he wrote. Do not invent numbers, employers or titles. Return only the pitch text.`;

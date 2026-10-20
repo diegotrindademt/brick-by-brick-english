@@ -13,7 +13,7 @@ const DEFAULTS = {
     newPerDay: 6,
     rate: 0.95,
     voiceURI: '',
-    decks: ['base', 'interview', 'story', 'tech', 'life', 'work', 'friends'],
+    decks: ['base', 'interview', 'errors', 'aiterms', 'story', 'tech', 'life', 'work', 'friends'],
     geminiKey: '',
     model: 'gemini-flash-lite-latest',
     autoSpeak: true,
@@ -25,7 +25,13 @@ export function load() {
     const raw = localStorage.getItem(KEY);
     if (!raw) return structuredClone(DEFAULTS);
     const data = JSON.parse(raw);
-    return { ...structuredClone(DEFAULTS), ...data, settings: { ...DEFAULTS.settings, ...(data.settings || {}) } };
+    const state = { ...structuredClone(DEFAULTS), ...data, settings: { ...DEFAULTS.settings, ...(data.settings || {}) } };
+    // v2 added two decks: switch them on once for people who installed v1.
+    if (!state.v2) {
+      for (const d of ['errors', 'aiterms']) if (!state.settings.decks.includes(d)) state.settings.decks.push(d);
+      state.v2 = true;
+    }
+    return state;
   } catch {
     return structuredClone(DEFAULTS);
   }

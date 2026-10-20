@@ -12,6 +12,17 @@ const CONTRACTIONS = {
   "haven't": 'have not', "hasn't": 'has not', "couldn't": 'could not', "wouldn't": 'would not',
 };
 
+// Spoken reductions count as the full form (learners often type what they hear).
+const REDUCTIONS = {
+  wanna: 'want to', gonna: 'going to', gotta: 'got to', lemme: 'let me', gimme: 'give me',
+  dunno: 'do not know', kinda: 'kind of', sorta: 'sort of', whatcha: 'what are you',
+  didja: 'did you', couldja: 'could you', shoulda: 'should have', coulda: 'could have',
+  woulda: 'would have', ya: 'you', cuz: 'because', ok: 'okay',
+  // Contractions typed without the apostrophe (only where it can't be another word).
+  im: 'i am', dont: 'do not', didnt: 'did not', cant: 'cannot', ive: 'i have',
+  youre: 'you are', isnt: 'is not', doesnt: 'does not', wasnt: 'was not',
+};
+
 const NUMBERS = {
   0: 'zero', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six',
   7: 'seven', 8: 'eight', 9: 'nine', 10: 'ten', 12: 'twelve', 14: 'fourteen',
@@ -29,7 +40,8 @@ export function normalize(text) {
     .replace(/[^a-z0-9' ]+/g, ' ')
     .replace(/'/g, '')
     .split(/\s+/)
-    .filter(Boolean);
+    .filter(Boolean)
+    .flatMap((w) => (REDUCTIONS[w] ? REDUCTIONS[w].split(' ') : [w]));
 }
 
 // Longest common subsequence over words: which target words were said, in order.
