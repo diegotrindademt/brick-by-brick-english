@@ -1,0 +1,17 @@
+{
+  "name": "Brick by Brick English",
+  "short_name": "Brick English",
+  "description": "Inglês para adultos sem tempo: 20 minutos por dia, falando desde o primeiro dia.",
+  "lang": "pt-BR",
+  "start_url": "./#hoje",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f3ee",
+  "theme_color": "#b4532a",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

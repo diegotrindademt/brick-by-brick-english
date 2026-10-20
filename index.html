@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Brick by Brick English</title>
+  <meta name="description" content="Inglês para adultos 40+ sem tempo: 20 minutos por dia com repetição espaçada, fala em voz alta, pronúncia e coach de IA.">
+  <meta name="theme-color" content="#b4532a">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="#hoje" data-route="hoje"><img src="icons/icon.svg" alt="" width="28" height="28"> Brick by Brick</a>
+    <span class="pills"><span id="streak">🔥 0</span><span id="minutes">⏱️ 0 min</span></span>
+    <a class="gear" href="#ajustes" data-route="ajustes" aria-label="Ajustes">⚙️</a>
+  </header>
+
+  <main id="view" aria-live="polite">
+    <noscript>Ative o JavaScript para usar o app.</noscript>
+  </main>
+
+  <nav class="tabbar" aria-label="Navegação">
+    <a href="#hoje" data-route="hoje"><span>🏠</span>Hoje</a>
+    <a href="#ouvir" data-route="ouvir"><span>🎧</span>Ouvir</a>
+    <a href="#pronuncia" data-route="pronuncia"><span>👄</span>Pronúncia</a>
+    <a href="#coach" data-route="coach"><span>🤖</span>Coach</a>
+    <a href="#progresso" data-route="progresso"><span>📈</span>Progresso</a>
+  </nav>
+
+  <div id="toast" role="status" hidden></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
